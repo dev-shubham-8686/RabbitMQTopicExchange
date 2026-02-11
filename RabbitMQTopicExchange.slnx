@@ -12,6 +12,7 @@
     <File Path="commands.txt" />
     <File Path="docker-compose.yml" />
     <File Path="README.md" />
+    <File Path="users.acl" />
   </Folder>
   <Project Path="Common/Common.csproj" Id="05668cb4-69c6-4ea2-a6ba-ea769a94f352" />
 </Solution>

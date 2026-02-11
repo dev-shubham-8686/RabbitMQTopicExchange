@@ -1,4 +1,5 @@
-﻿using Common.State;
+﻿using Common.Models;
+using Common.State;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using StackExchange.Redis;
@@ -20,7 +21,7 @@ namespace OrderService.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Order request)
+        public async Task<IActionResult> Create([FromBody] CreateOrderRequest request)
         {
 
             // Generate new id (simplified demo)
@@ -30,7 +31,7 @@ namespace OrderService.Controllers
 
             await _state.SetAsync($"person:{id}", request);
 
-            _rabbitSender.PublishMessage<Order>(request, "order.cookwaffle");
+            _rabbitSender.PublishMessage<CreateOrderRequest>(request, "order.cookwaffle");
 
             return Ok(new { id });
 
@@ -47,15 +48,4 @@ namespace OrderService.Controllers
         
     }
 
-    public class Order
-    {
-       public int? Id { get; set; }
-
-       public string? Name { get; set; }
-
-       public int? Quantity { get; set; }
-
-       public decimal? Price { get; set; }
-
-    }
 }

@@ -1,4 +1,5 @@
-﻿using Messaging;
+﻿using Common.Models;
+using Messaging;
 using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.SignalR;
 using RabbitMQ.Client;
@@ -50,9 +51,9 @@ namespace KitchenService
             {
                 var body = ea.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
-                var order = JsonSerializer.Deserialize<Order>(message);
+                var order = JsonSerializer.Deserialize<CreateOrderRequest>(message);
                 //await _orderHub.Clients.All.SendAsync("new-order", order);
-                Console.WriteLine($"RabbitReceiver: {order.Id} - {order.Name} - {order.Quantity}");
+                Console.WriteLine($"RabbitReceiver: {order?.Id ?? 0} - {order.OrderName} - {order.Quantity}");
                 _channel.BasicAck(ea.DeliveryTag, false);
             };
 
@@ -62,15 +63,4 @@ namespace KitchenService
         }
     }
 
-    public class Order
-    {
-        public int? Id { get; set; }
-
-        public string? Name { get; set; }
-
-        public int? Quantity { get; set; }
-
-        public decimal? Price { get; set; }
-
-    }
 }
