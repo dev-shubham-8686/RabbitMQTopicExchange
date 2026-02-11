@@ -1,0 +1,17 @@
+<Solution>
+  <Folder Name="/KitchenService/">
+    <Project Path="KitchenService/KitchenService.csproj" Id="feaa79fc-2a11-4d03-8c0d-773a6c4ed557" />
+  </Folder>
+  <Folder Name="/OrderService/">
+    <Project Path="OrderService/OrderService.csproj" Id="c1fb4194-ddf7-4fe2-a75f-dbe491646a65" />
+  </Folder>
+  <Folder Name="/RabbitMQ/">
+    <Project Path="Messaging/Messaging.csproj" Id="374727ac-1d69-4f92-83bb-3aae59e0ee20" />
+  </Folder>
+  <Folder Name="/Solution Items/">
+    <File Path="commands.txt" />
+    <File Path="docker-compose.yml" />
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="Common/Common.csproj" Id="05668cb4-69c6-4ea2-a6ba-ea769a94f352" />
+</Solution>
