@@ -14,14 +14,30 @@ services:
       retries: 10
 
   redis:
-    image: redis:7-alpine
-    container_name: redis
-    ports:
-      - "6379:6379"
-    command: ["redis-server", "--appendonly", "yes"]
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 5s
-      timeout: 3s
-      retries: 20
+   image: redis:7-alpine
+   container_name: redis
+   ports:
+     - "6379:6379"
+   command: ["redis-server", "--appendonly", "yes", "--aclfile", "/usr/local/etc/redis/users.acl"]
+   volumes:
+     - ./users.acl:/usr/local/etc/redis/users.acl
+   healthcheck:
+     test: ["CMD", "redis-cli", "-a", "mypassword", "ping"]
+     interval: 5s
+     timeout: 3s
+     retries: 20
+
+
+
+  # redis:
+  #   image: redis:7-alpine
+  #   container_name: redis
+  #   ports:
+  #     - "6379:6379"
+  #   command: ["redis-server", "--appendonly", "yes"]
+  #   healthcheck:
+  #     test: ["CMD", "redis-cli", "ping"]
+  #     interval: 5s
+  #     timeout: 3s
+  #     retries: 20
 
